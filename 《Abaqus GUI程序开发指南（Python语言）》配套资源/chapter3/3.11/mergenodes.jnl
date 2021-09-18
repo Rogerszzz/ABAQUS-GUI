@@ -1,0 +1,116 @@
+# -*- coding: mbcs -*-
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.openCatia(fileName=
+    'F:/\xd4\xadE\xc5\xcc\xca\xfd\xbe\xdd/\xd1\xa7\xcf\xb0\xd7\xdc\xbd\xe1/abaqus\xb7\xd6\xc0\xe0\xd7\xdc\xbd\xe1/\xb9\xfa\xb7\xc0\xb9\xa4\xd2\xb5\xb3\xf6\xb0\xe6\xc9\xe7\xd4\xbc\xb8\xe5/\xcb\xe6\xca\xe9\xb9\xe2\xc5\xcc/chapter3/3.4/importassembly.CATProduct'
+    , topology=SOLID, useServer=True)
+mdb.models['Model-1'].PartFromGeometryFile(combine=False, dimensionality=
+    THREE_D, geometryFile=mdb.acis, name='importassembly-1', scale=1.0, 
+    stitchAfterCombine=True, stitchTolerance=1.0, type=DEFORMABLE_BODY)
+mdb.models['Model-1'].PartFromGeometryFile(bodyNum=2, combine=False, 
+    dimensionality=THREE_D, geometryFile=mdb.acis, name='importassembly-2', 
+    scale=1.0, stitchAfterCombine=True, stitchTolerance=1.0, type=
+    DEFORMABLE_BODY)
+mdb.models['Model-1'].ConstrainedSketch(name='__profile__', sheetSize=200.0, 
+    transform=(0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 8.0))
+mdb.models['Model-1'].ConstrainedSketch(name='__profile__', sheetSize=200.0)
+mdb.models['Model-1'].sketches['__profile__'].rectangle(point1=(0.0, 0.0), 
+    point2=(10.0, 10.0))
+mdb.models['Model-1'].Part(dimensionality=THREE_D, name='Part-2', type=
+    DEFORMABLE_BODY)
+mdb.models['Model-1'].parts['Part-2'].BaseSolidExtrude(depth=1.0, sketch=
+    mdb.models['Model-1'].sketches['__profile__'])
+del mdb.models['Model-1'].sketches['__profile__']
+del mdb.models['Model-1'].parts['importassembly-1']
+del mdb.models['Model-1'].parts['importassembly-2']
+mdb.models['Model-1'].parts['Part-2'].seedPart(deviationFactor=0.1, size=1.0)
+mdb.models['Model-1'].parts['Part-2'].generateMesh()
+mdb.models['Model-1'].parts.changeKey(fromName='Part-2', toName='Part-1')
+mdb.models['Model-1'].parts['Part-1'].Set(elements=
+    mdb.models['Model-1'].parts['Part-1'].elements.getSequenceFromMask(mask=(
+    '[#3 ]', ), ), name='set_1')
+mdb.models['Model-1'].parts['Part-1'].Set(elements=
+    mdb.models['Model-1'].parts['Part-1'].elements.getSequenceFromMask(mask=(
+    '[#3 ]', ), ), name='set_haha')
+mdb.models['Model-1'].parts['Part-1'].Set(elements=
+    mdb.models['Model-1'].parts['Part-1'].elements.getSequenceFromMask(mask=(
+    '[#3 ]', ), ), name='set_haha')
+mdb.models['Model-1'].parts['Part-1'].Set(elements=
+    mdb.models['Model-1'].parts['Part-1'].elements.getSequenceFromMask(mask=(
+    '[#3 ]', ), ), name='set_hahaf')
+mdb.models['Model-1'].parts['Part-1'].Set(elements=
+    mdb.models['Model-1'].parts['Part-1'].elements.getSequenceFromMask(mask=(
+    '[#3 ]', ), ), name='set_new')
+mdb.models['Model-1'].parts['Part-1'].features['Solid extrude-1'].setValues(
+    depth=10.0)
+mdb.models['Model-1'].parts['Part-1'].regenerate()
+mdb.models['Model-1'].parts['Part-1'].generateMesh()
+mdb.models['Model-1'].parts['Part-1'].PartFromMesh(name='Part-1-mesh')
+# Save by jly4553 on Fri Aug 29 14:28:46 2014
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+del mdb.models['Model-1'].parts['Part-1-mesh']
+mdb.models['Model-1'].parts['Part-1'].deleteMesh()
+mdb.models['Model-1'].parts['Part-1'].seedPart(deviationFactor=0.1, size=5.0)
+mdb.models['Model-1'].parts['Part-1'].seedPart(deviationFactor=0.1, size=4.0)
+mdb.models['Model-1'].parts['Part-1'].generateMesh()
+mdb.models['Model-1'].parts['Part-1'].PartFromMesh(name='Part-1-mesh')
+# Save by jly4553 on Fri Aug 29 14:40:02 2014
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].parts['Part-1-mesh'].mergeNodes(node1=
+    mdb.models['Model-1'].parts['Part-1-mesh'].nodes[0], node2=
+    mdb.models['Model-1'].parts['Part-1-mesh'].nodes[1])
+mdb.models['Model-1'].parts['Part-1-mesh'].mergeNodes(node1=
+    mdb.models['Model-1'].parts['Part-1-mesh'].nodes[0], node2=
+    mdb.models['Model-1'].parts['Part-1-mesh'].nodes[4])
+mdb.models['Model-1'].parts['Part-1-mesh'].mergeNodes(node1=
+    mdb.models['Model-1'].parts['Part-1-mesh'].nodes[0], node2=
+    mdb.models['Model-1'].parts['Part-1-mesh'].nodes[8])
+mdb.meshEditOptions.setValues(enableUndo=True, maxUndoCacheElements=0.5)
+mdb.models['Model-1'].parts['Part-1-mesh'].mergeNodes(node1=
+    mdb.models['Model-1'].parts['Part-1-mesh'].nodes[0], node2=
+    mdb.models['Model-1'].parts['Part-1-mesh'].nodes[1])
+mdb.models['Model-1'].parts['Part-1-mesh'].mergeNodes(node1=
+    mdb.models['Model-1'].parts['Part-1-mesh'].nodes[3], node2=
+    mdb.models['Model-1'].parts['Part-1-mesh'].nodes[4])
+del mdb.models['Model-1'].parts['Part-1-mesh']
+mdb.models['Model-1'].parts['Part-1'].deleteMesh()
+mdb.models['Model-1'].parts['Part-1'].seedPart(deviationFactor=0.1, size=5.0)
+mdb.models['Model-1'].parts['Part-1'].features['Solid extrude-1'].setValues(
+    depth=5.0)
+mdb.models['Model-1'].parts['Part-1'].regenerate()
+mdb.models['Model-1'].parts['Part-1'].generateMesh()
+mdb.models['Model-1'].parts['Part-1'].PartFromMesh(name='Part-1-mesh')
+# Save by jly4553 on Fri Aug 29 14:59:13 2014
+# Save by jly4553 on Fri Aug 29 16:25:46 2014
