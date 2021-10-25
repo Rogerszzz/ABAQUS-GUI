@@ -6,10 +6,15 @@
 
 from rsg.rsgGui import *
 from abaqusConstants import INTEGER, FLOAT
-dialogBox = RsgDialog(title='Title', kernelModule='', kernelFunction='', includeApplyBtn=False, includeSeparator=True, okBtnText='OK', applyBtnText='Apply', execDir=thisDir)
-RsgGroupBox(name='GroupBox_1', p='DialogBox', text='Material parameters', layout='LAYOUT_FILL_X|LAYOUT_FILL_Y')
-RsgComboBox(name='ComboBox_1', p='GroupBox_1', text='Material:', keyword='materialName', default='', comboType='MDB', repository='materials', rootText='Model:', rootKeyword='modelName', layout='VERTICAL')
-RsgTabBook(name='TabBook_1', p='GroupBox_1', layout='0')
-RsgTabItem(name='TabItem_4', p='TabBook_1', text='Tab')
-RsgTable(p='TabItem_4', numRows=3, columnData=[('Properties', 'String', 140), ('Mean', 'Float', 100), ('Std', 'Float', 100)], showRowNumbers=True, showGrids=True, keyword='keyword04', popupFlags='AFXTable.POPUP_CUT|AFXTable.POPUP_COPY|AFXTable.POPUP_PASTE|AFXTable.POPUP_INSERT_ROW|AFXTable.POPUP_DELETE_ROW|AFXTable.POPUP_CLEAR_CONTENTS|AFXTable.POPUP_READ_FROM_FILE|AFXTable.POPUP_WRITE_TO_FILE')
+dialogBox = RsgDialog(title='Title', kernelModule='materialfunc', kernelFunction='materialfunc', includeApplyBtn=False, includeSeparator=True, okBtnText='OK', applyBtnText='Apply', execDir=thisDir)
+RsgComboBox(name='ComboBox_3', p='DialogBox', text='Material:', keyword='materialName', default='', comboType='MDB', repository='materials', rootText='Model:', rootKeyword='modelName', layout='HORIZONTAL')
+RsgGroupBox(name='GroupBox_1', p='DialogBox', text='Material parameters', layout='LAYOUT_FILL_X')
+RsgGroupBox(name='GroupBox_3', p='GroupBox_1', text='Density', layout='0')
+RsgTextField(p='GroupBox_3', fieldType='Float', ncols=12, labelText='Mean', keyword='Density_mean', default='')
+RsgTextField(p='GroupBox_3', fieldType='Float', ncols=12, labelText='COV  ', keyword='Density_cov', default='')
+RsgGroupBox(name='GroupBox_2', p='GroupBox_1', text='E', layout='0')
+RsgTextField(p='GroupBox_2', fieldType='Float', ncols=12, labelText='Mean', keyword='E_mean', default='')
+RsgTextField(p='GroupBox_2', fieldType='Float', ncols=12, labelText='COV  ', keyword='E_cov', default='')
+RsgTextField(p='DialogBox', fieldType='Integer', ncols=12, labelText='Jobs', keyword='job_nums', default='1')
+RsgTextField(p='DialogBox', fieldType='String', ncols=12, labelText='sample file name', keyword='datafile_name', default='sample_data')
 dialogBox.show()

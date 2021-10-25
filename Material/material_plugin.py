@@ -8,7 +8,7 @@ toolset = getAFXApp().getAFXMainWindow().getPluginToolset()
 toolset.registerGuiMenuButton(
     buttonText='Material', 
     object=Activator(os.path.join(thisDir, 'materialDB.py')),
-    kernelInitString='',
+    kernelInitString='import materialfunc',
     messageId=AFXMode.ID_ACTIVATE,
     icon=None,
     applicableModules=ALL,
